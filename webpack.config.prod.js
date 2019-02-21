@@ -7,6 +7,7 @@ import path from 'path';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
+  'process.env.API_URL' : JSON.stringify('http://localhost:8090'),
   __DEV__: false
 };
 

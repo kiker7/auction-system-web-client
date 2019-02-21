@@ -30,6 +30,7 @@
   "author": "rutynar",
   "license": "MIT",
   "dependencies": {
+    "axios": "0.18.0",
     "connected-react-router": "4.4.1",
     "object-assign": "4.1.1",
     "react": "16.4.2",
@@ -37,6 +38,7 @@
     "react-redux": "5.0.7",
     "react-router-dom": "4.3.1",
     "redux": "4.0.0",
+    "redux-form": "8.1.0",
     "redux-thunk": "2.3.0"
   },
   "devDependencies": {
@@ -77,6 +79,7 @@
     "json-loader": "0.5.7",
     "mini-css-extract-plugin": "0.4.2",
     "mockdate": "2.0.2",
+    "moxios": "0.4.0",
     "node-sass": "4.9.3",
     "opn-cli": "3.1.0",
     "postcss-loader": "3.0.0",

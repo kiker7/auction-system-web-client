@@ -1,0 +1,8 @@
+export const BEGIN_API_CALL = "BEGIN_API_CALL";
+export const API_CALL_ERROR = "API_CALL_ERROR";
+
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
+
+export const SIGNIN_USER = "SINGIN_USER";
+export const SINGOUT_USER = "SINGOUT_USER";

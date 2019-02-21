@@ -25,6 +25,9 @@ export default {
   plugins: [
     new HardSourceWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify("http://localhost:8090")
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({     // Create HTML file that includes references to bundled CSS and JS.
       template: 'src/index.ejs',
