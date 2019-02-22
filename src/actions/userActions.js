@@ -7,6 +7,10 @@ export function singInSuccess(user) {
   return {type: types.SIGNIN_USER, user};
 }
 
+export function signInFailure() {
+  return {type: types.SIGNIN_USER_FAILURE};
+}
+
 export function singIn(user) {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -17,6 +21,7 @@ export function singIn(user) {
       })
       .catch(error => {
         dispatch(apiCallError());
+        dispatch(signInFailure());
         throw error;
       });
   }
