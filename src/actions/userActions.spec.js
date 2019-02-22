@@ -38,7 +38,7 @@ describe("User Actions", () => {
         password: '123456'
       };
 
-      return store.dispatch(userActions.singIn(user))
+      return store.dispatch(userActions.signIn(user))
         .then(() => {
           expect(store.getActions()).toEqual(expectedActions);
         });

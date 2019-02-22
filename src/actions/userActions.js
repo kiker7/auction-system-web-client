@@ -11,7 +11,7 @@ export function signInFailure() {
   return {type: types.SIGNIN_USER_FAILURE};
 }
 
-export function singIn(user) {
+export function signIn(user) {
   return function (dispatch) {
     dispatch(beginApiCall());
     return userApi

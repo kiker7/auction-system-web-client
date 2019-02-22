@@ -1,3 +1,4 @@
 export default {
-  apiCallsInProgress: 0
+  apiCallsInProgress: 0,
+  user: {}
 };

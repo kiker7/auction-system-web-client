@@ -10,16 +10,18 @@ export default function (ComposedComponent) {
 
     static getDerivedStateFromProps(props) {
       if (!props.authenticated) {
-        props.push('/signup');
+        props.push('/signin');
         return null;
       }
+      return null;
     }
 
     shouldComponentUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        nextProps.push('/signup');
+        nextProps.push('/signin');
         return false;
       }
+      return false;
     }
 
     render() {

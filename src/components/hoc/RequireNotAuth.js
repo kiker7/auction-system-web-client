@@ -20,6 +20,7 @@ export default function (ComposedComponent) {
       if(!nextProps.authenticated){
         push('/signin');
       }
+      return false;
     }
 
     render() {

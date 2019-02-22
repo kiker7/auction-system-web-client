@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = process.env.API_URL + "/token";
+const baseUrl = process.env.API_URL + "/auth/token";
 
 export function singInUser(user) {
   const {username, password} = user;
