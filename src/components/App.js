@@ -10,6 +10,7 @@ import Signin from './auth/Signin';
 import LibraryPage from './library/LibraryPage';
 import AuctionsPage from './auctions/AuctionsPage';
 import Header from './common/Header';
+import GamePage from './games/GamesPage';
 
 import requireAuth from './hoc/RequireAuth';
 import requireNotAuth from './hoc/RequireNotAuth';
@@ -25,6 +26,7 @@ class App extends React.Component {
           <Route path="/signup" component={requireNotAuth(Signup)}/>
           <Route path="/auctions" component={requireAuth(AuctionsPage)} />
           <Route path="/library" component={requireAuth(LibraryPage)} />
+          <Route path="/games" component={requireAuth(GamePage)} />
           <Route render={PageNotFound}/>
         </Switch>
         <ToastContainer autoClose={3000} hideProgressBar />

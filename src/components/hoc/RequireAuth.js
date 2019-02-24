@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {push} from 'connected-react-router';
 import {connect} from 'react-redux';
+import {toast} from "react-toastify";
 
 export default function (ComposedComponent) {
   class Authentication extends Component {
@@ -10,6 +11,7 @@ export default function (ComposedComponent) {
 
     static getDerivedStateFromProps(props) {
       if (!props.authenticated) {
+        toast.info("You must be logged in.");
         props.push('/signin');
         return null;
       }
@@ -18,6 +20,7 @@ export default function (ComposedComponent) {
 
     shouldComponentUpdate(nextProps) {
       if (!nextProps.authenticated) {
+        toast.info("You must be logged in.");
         nextProps.push('/signin');
         return false;
       }

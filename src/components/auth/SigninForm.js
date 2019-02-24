@@ -2,12 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../common/TextInput';
 
-const SigninForm = ({onSave, onChange, errors, sending=false}) => {
+const SigninForm = ({onSave, onChange, errors, sending = false}) => {
 
   return (
     <form onSubmit={onSave}>
-      <h2>Sign in</h2>
-      { errors.onSave && (
+      <div className="text-center">
+        <h2>Auction system</h2>
+      </div>
+      {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
         </div>
@@ -15,21 +17,24 @@ const SigninForm = ({onSave, onChange, errors, sending=false}) => {
 
       <TextInput
         name="username"
-        label="Username"
+        label=""
+        placeholder="User name"
         onChange={onChange}
         error={errors.username}
       />
 
       <TextInput
         name="password"
-        label="Password"
+        label=""
+        placeholder="Password"
         onChange={onChange}
         error={errors.password}
       />
-
-      <button type="submit" disabled={sending} className="btn btn-primary">
-        {sending ? "Sending.." : "Login"}
-      </button>
+      <div className="text-center">
+        <button type="submit" disabled={sending} className="btn btn-primary">
+          {sending ? "Sending.." : "Login"}
+        </button>
+      </div>
     </form>
   );
 };

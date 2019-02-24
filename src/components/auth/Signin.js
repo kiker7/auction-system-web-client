@@ -50,12 +50,14 @@ export class Signin extends React.Component{
 
   render() {
     return (
-      <SigninForm
-        onSave={this.handleSave}
-        onChange={this.handleChange}
-        sending={this.state.sending}
-        errors={this.state.errors}
-      />
+      <div className="container mt-4" id="sign-in-form">
+        <SigninForm
+          onSave={this.handleSave}
+          onChange={this.handleChange}
+          sending={this.state.sending}
+          errors={this.state.errors}
+        />
+      </div>
     );
   }
 }
