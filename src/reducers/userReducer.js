@@ -7,6 +7,8 @@ export default function users(state = initialState.user, action) {
       return {...state, authenticated: true, error: {}};
     case types.SIGNIN_USER_FAILURE:
       return {...state, authenticated: false, error: {}};
+    case types.SINGOUT_USER:
+      return {...state, authenticated: false, error: {}};
     default:
         return state;
   }

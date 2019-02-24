@@ -29,7 +29,7 @@ class App extends React.Component {
           <Route path="/games" component={requireAuth(GamePage)} />
           <Route render={PageNotFound}/>
         </Switch>
-        <ToastContainer autoClose={3000} hideProgressBar />
+        <ToastContainer autoClose={1500} hideProgressBar />
       </div>
     );
   }

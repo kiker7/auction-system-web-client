@@ -7,7 +7,7 @@ import * as actions from "../../actions/userActions";
 import {connect} from "react-redux";
 import { toast } from 'react-toastify';
 
-export class Signin extends React.Component{
+class Signin extends React.Component{
 
   state = {
     user: {},

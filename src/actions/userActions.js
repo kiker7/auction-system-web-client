@@ -11,6 +11,10 @@ export function signInFailure() {
   return {type: types.SIGNIN_USER_FAILURE};
 }
 
+export function signOutSsuccess(user) {
+  return {type: types.SINGOUT_USER, user};
+}
+
 export function signIn(user) {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -24,5 +28,11 @@ export function signIn(user) {
         dispatch(signInFailure());
         throw error;
       });
+  }
+}
+
+export function signOut(user) {
+  return function (dispatch) {
+    return dispatch(signOutSsuccess(user));
   }
 }

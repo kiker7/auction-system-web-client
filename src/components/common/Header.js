@@ -1,11 +1,17 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, Link} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
+import * as actions from '../../actions/userActions';
+import {bindActionCreators} from "redux";
 
 const activeStyle = {color: "#F15B2A"};
 
-export class Header extends React.Component {
+class Header extends React.Component {
+
+  signOut = () =>{
+    this.props.actions.signOut(this.props.user);
+  };
 
   render() {
     return (
@@ -39,9 +45,9 @@ export class Header extends React.Component {
           {this.props.authenticated && (
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <NavLink to="/signout" activeStyle={activeStyle} className="nav-link" exact>
+                <Link to="/signin" onClick={this.signOut} className="nav-link" exact>
                   Logout
-                </NavLink>
+                </Link>
               </li>
             </ul>
           )}
@@ -67,13 +73,22 @@ export class Header extends React.Component {
 }
 
 Header.propTypes = {
-  authenticated: PropTypes.bool
+  authenticated: PropTypes.bool,
+  user: PropTypes.object,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    user : state.user,
     authenticated: state.user.authenticated
   };
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch){
+  return {
+    actions : bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
