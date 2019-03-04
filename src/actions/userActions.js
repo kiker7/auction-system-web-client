@@ -41,7 +41,6 @@ export function signOut(user) {
   }
 }
 
-
 export function loadUsers() {
   return function (dispatch) {
     dispatch(beginApiCall());

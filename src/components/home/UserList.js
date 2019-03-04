@@ -1,25 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import UserCard from './UserCard';
 
 const UserList = ({users}) => (
-  <table className="table">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-    </tr>
-    </thead>
-    <tbody>
+  <div className=" row user-list">
     {users.map(user => {
       return (
-        <tr key={user.id}>
-          <td>{user.firstName}</td>
-          <td>{user.lastName}</td>
-        </tr>
-      )
-    })}
-    </tbody>
-  </table>
+        <UserCard key={user.id} user={user}/>
+      )})
+    }
+  </div>
 );
 
 UserList.propTypes = {

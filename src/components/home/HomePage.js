@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {loadUsers} from "../../actions/userActions";
 import {toastError} from "../../utils/errors";
+import NotificationList from './NotificationList';
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -21,9 +22,10 @@ class HomePage extends React.Component {
     const {users} = this.props;
 
     return (
-      <>
+      <div className="container">
+        <NotificationList />
       {users.length > 0 ? (<UserLst users={users}/>) : (<div>No elements</div>)}
-      </>
+      </div>
     );
   }
 }
