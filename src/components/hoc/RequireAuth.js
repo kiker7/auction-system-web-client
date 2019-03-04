@@ -37,7 +37,7 @@ export default function (ComposedComponent) {
   };
 
   function mapStateToProps(state) {
-    return {authenticated: state.user.authenticated}
+    return {authenticated: state.userStore.currentUser.authenticated}
   }
 
   return connect(mapStateToProps, {push})(Authentication);

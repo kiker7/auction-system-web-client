@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import * as actions from '../../actions/userActions';
 import {bindActionCreators} from "redux";
 
-const activeStyle = {color: "#F15B2A"};
-
 class Header extends React.Component {
 
   signOut = () =>{
@@ -16,7 +14,7 @@ class Header extends React.Component {
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <NavLink to="/" activeStyle={activeStyle} className="nav-link navbar-brand" exact>
+        <NavLink to="/" className="nav-link navbar-brand" exact>
           Home
         </NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -24,43 +22,43 @@ class Header extends React.Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item">
-              <NavLink to="/auctions" activeStyle={activeStyle} className="nav-link" exact>
-                Auctions
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/library" activeStyle={activeStyle} className="nav-link">
-                Library
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="/games" activeStyle={activeStyle} className="nav-link" exact>
-                Games
-              </NavLink>
-            </li>
-          </ul>
-
+          {this.props.authenticated && (
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <NavLink to="/auctions" className="nav-link" exact>
+                  Auctions
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/library" className="nav-link">
+                  Library
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/games" className="nav-link" exact>
+                  Games
+                </NavLink>
+              </li>
+            </ul>
+          )}
           {this.props.authenticated && (
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to="/signin" onClick={this.signOut} className="nav-link" exact>
+                <Link to="/signin" onClick={this.signOut} className="nav-link">
                   Logout
                 </Link>
               </li>
             </ul>
           )}
-
           {!this.props.authenticated && (
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <NavLink to="/signup" activeStyle={activeStyle} className="nav-link" exact>
+                <NavLink to="/signup" className="nav-link" exact>
                   Register
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to="/signin" activeStyle={activeStyle} className="nav-link" exact>
+                <NavLink to="/signin" className="nav-link" exact>
                   Login
                 </NavLink>
               </li>
@@ -80,8 +78,8 @@ Header.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user : state.user,
-    authenticated: state.user.authenticated
+    user : state.userStore.currentUser,
+    authenticated: state.userStore.currentUser.authenticated
   };
 }
 
