@@ -9,6 +9,8 @@ export default function users(state = initialState.userStore, action) {
       return {...state, currentUser: {authenticated: false}, error: {}};
     case types.SINGOUT_USER:
       return {...state, currentUser: {authenticated: false}, error: {}};
+    case types.USERS_LOAD_SUCCESS:
+      return {...state, users: action.users};
     default:
         return state;
   }

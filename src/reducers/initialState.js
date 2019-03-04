@@ -3,6 +3,7 @@ export default {
   userStore: {
     currentUser: {
       authenticated: false
-    }
+    },
+    users: []
   }
 };

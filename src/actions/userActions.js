@@ -15,6 +15,10 @@ export function signOutSsuccess(user) {
   return {type: types.SINGOUT_USER, user};
 }
 
+export function loadUsersSuccess(users) {
+  return {type: types.USERS_LOAD_SUCCESS, users};
+}
+
 export function signIn(user) {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -34,5 +38,20 @@ export function signIn(user) {
 export function signOut(user) {
   return function (dispatch) {
     return dispatch(signOutSsuccess(user));
+  }
+}
+
+
+export function loadUsers() {
+  return function (dispatch) {
+    dispatch(beginApiCall());
+    return userApi.getUsers()
+      .then(users => {
+        dispatch(loadUsersSuccess(users))
+      })
+      .catch(error => {
+        dispatch(apiCallError());
+        throw error;
+      });
   }
 }

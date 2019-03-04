@@ -43,4 +43,48 @@ describe("User Actions", () => {
           expect(store.getActions()).toEqual(expectedActions);
         });
     });
+
+    it("should create BEGIN_API_CALL and USERS_LOAD_SUCCESS action", () => {
+      moxios.wait(() => {
+        const request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: [
+            {
+              "username": "new-user1",
+              "firstName": "First-user",
+              "lastName": "Last-user"
+            },
+            {
+              "username": "new-user2",
+              "firstName": "First-user",
+              "lastName": "Last-user"
+            }
+          ]
+        });
+      });
+
+      const expectedActions = [
+        {type: types.BEGIN_API_CALL},
+        {type: types.USERS_LOAD_SUCCESS,
+          users: [
+            {
+              "username": "new-user1",
+              "firstName": "First-user",
+              "lastName": "Last-user"
+            },
+            {
+              "username": "new-user2",
+              "firstName": "First-user",
+              "lastName": "Last-user"
+            }
+          ]
+        }
+      ];
+      const store = mockStore();
+      return store.dispatch(userActions.loadUsers())
+        .then(() => {
+          expect(store.getActions()).toEqual(expectedActions);
+        });
+    });
 });
