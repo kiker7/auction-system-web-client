@@ -1,1 +1,1 @@
-export const HEADER = {headers: {"Authorization" : `Bearer ${JSON.parse(localStorage.getItem('user')).token}`}};
+export const HEADER = {headers: {"Authorization" : `Bearer ${localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).token}`}};

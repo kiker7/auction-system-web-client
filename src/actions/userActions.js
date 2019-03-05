@@ -37,6 +37,7 @@ export function signIn(user) {
 
 export function signOut(user) {
   return function (dispatch) {
+    localStorage.removeItem('user');
     return dispatch(signOutSsuccess(user));
   }
 }
