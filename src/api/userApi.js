@@ -1,11 +1,9 @@
 import axios from 'axios';
-import * as header from './requestHeader';
-
-const baseUrl = process.env.API_URL;
+import * as utils from './requestUtils';
 
 export function singInUser(user) {
   const {username, password} = user;
-  return axios.post(baseUrl + "/auth/token", {username, password})
+  return axios.post(utils.BASE_URL + "/auth/token", {username, password})
     .then(response => {
       localStorage.setItem('user', JSON.stringify(response.data));
     })
@@ -16,7 +14,7 @@ export function singInUser(user) {
 }
 
 export function getUsers() {
-  return axios.get(baseUrl + "/api/user", header.HEADER)
+  return axios.get(utils.BASE_URL + "/api/user", utils.HEADER)
     .then(response => response.data)
     .catch(error => {
       console.error("API call failed. " + error); // eslint-disable-line no-console
