@@ -4,6 +4,7 @@ export default {
     currentUser: {
       authenticated: false
     },
-    users: []
+    users: [],
+    library: []
   }
 };

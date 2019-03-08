@@ -11,6 +11,10 @@ export default function users(state = initialState.userStore, action) {
       return {...state, currentUser: {authenticated: false}, error: {}};
     case types.USERS_LOAD_SUCCESS:
       return {...state, users: action.users};
+    case types.LIBRARY_LOAD_SUCCESS:
+      return {...state, library: action.library};
+    case types.POST_GAME_SUCCESS:
+      return {...state, library: [... state.library , { ...action.game}]};
     default:
         return state;
   }
