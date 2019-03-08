@@ -1,8 +1,8 @@
 import axios from 'axios';
 import * as utils from './requestUtils';
 
-export function loadUserLibrary(id) {
-  axios.get(utils.BASE_URL + "/api/user/" + id + "/library", utils.HEADER)
+export function loadUserLibrary(userName) {
+  axios.get(utils.BASE_URL + "/api/user/" + userName + "/library", utils.HEADER)
     .then(response => response.data)
     .catch(error => {
       console.error("API call failed. " + error); // eslint-disable-line no-console
