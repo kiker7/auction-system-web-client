@@ -5,6 +5,6 @@ export default {
       authenticated: false
     },
     users: [],
-    library: []
+    library: {}
   }
 };

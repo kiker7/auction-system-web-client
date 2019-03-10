@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import GameForm from '../games/GameForm';
 import GameList from '../games/GameList';
 import { produce } from "immer";
-// import { loadUserLibrary } from "../../api/libraryApi";
-// import { toastError } from "../../utils/errors";
+import * as actions from "../../actions/gameActions";
+import { toastError } from "../../utils/errors";
+import * as userUtils from '../../utils/userUtils';
+import {bindActionCreators} from "redux";
+import { toast } from "react-toastify";
 
 class LibraryPage extends React.Component{
 
@@ -16,13 +19,11 @@ class LibraryPage extends React.Component{
   };
 
   componentDidMount() {
-    // const { dispatch } = this.props;
-    //
-    //
-    // dispatch(loadUserLibrary())
-    //   .catch(error => {
-    //     toastError("Failed to load user library.", error);
-    //   });
+
+    this.props.actions.loadLibrary(userUtils.getCurrentUserName())
+      .catch(error => {
+        toastError("Failed to load user library.", error);
+      });
   }
 
   handleChange = (event) => {
@@ -34,7 +35,20 @@ class LibraryPage extends React.Component{
 
   handleSave = event => {
     event.preventDefault();
+    this.setState({sending: true});
 
+    this.props.actions
+      .saveGame(this.state.game)
+      .then(() => {
+        this.setState({sending: false, errors: {}});
+        toast.success("Game saved");
+      })
+      .catch(error => {
+        this.setState({
+          sending: false,
+          errors: {onSave: error.message}
+        });
+      });
   };
 
   render() {
@@ -45,15 +59,15 @@ class LibraryPage extends React.Component{
         <div className="mt-4 mb-4">
           <GameForm onSave={this.handleSave} onChange={this.handleChange} sending={this.state.sending} errors={this.state.errors}/>
         </div>
-        { library.length > 0 ? (<GameList games={library}/>) : (<div className="card bg-info text-white"><div className="card-body">Empty library</div></div>) }
+        { library.games ? (<GameList games={library.games}/>) : (<div className="card bg-info text-white"><div className="card-body">Empty library</div></div>) }
       </div>
     );
   }
 }
 
 LibraryPage.propTypes = {
-  dispatch : PropTypes.func.isRequired,
-  library : PropTypes.array
+  library : PropTypes.object,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
@@ -62,4 +76,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(LibraryPage);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LibraryPage);

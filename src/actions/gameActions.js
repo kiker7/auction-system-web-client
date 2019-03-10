@@ -14,10 +14,10 @@ export function saveUserGameFailure(game) {
   return {type: types.POST_GAME_FAILURE, game};
 }
 
-export function loadLibrary(userId) {
+export function loadLibrary(userName) {
   return function (dispatch) {
     dispatch(beginApiCall());
-    return libraryApi.loadUserLibrary(userId)
+    return libraryApi.loadUserLibrary(userName)
       .then(library => dispatch(loadLibrarySuccess(library)))
       .catch(error => {
         dispatch(apiCallError());
@@ -30,10 +30,12 @@ export function saveGame(game) {
   return function (dispatch) {
     dispatch(beginApiCall());
     return libraryApi.saveUserGame(game)
-      .then(game => dispatch(saveUserGameSuccess(game)))
+      .then((lib) => dispatch(saveUserGameSuccess(lib.games.pop())))
       .catch(error => {
         dispatch(saveUserGameFailure(game));
         dispatch(apiCallError());
+
+
         throw error;
       });
   }

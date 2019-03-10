@@ -14,8 +14,8 @@ export default function users(state = initialState.userStore, action) {
     case types.LIBRARY_LOAD_SUCCESS:
       return {...state, library: action.library};
     case types.POST_GAME_SUCCESS:
-      return {...state, library: [... state.library , { ...action.game}]};
+      return {...state, library: {...state.library, games: [...state.library.games, action.game]}};
     default:
-        return state;
+      return state;
   }
 }
