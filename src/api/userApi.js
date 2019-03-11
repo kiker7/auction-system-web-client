@@ -6,6 +6,7 @@ export function singInUser(user) {
   return axios.post(utils.BASE_URL + "/auth/token", {username, password})
     .then(response => {
       localStorage.setItem('user', JSON.stringify(response.data));
+      return response.data;
     })
     .catch(error => {
       console.log("API call failed. " + error); // eslint-disable-line no-console

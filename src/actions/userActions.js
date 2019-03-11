@@ -24,8 +24,8 @@ export function signIn(user) {
     dispatch(beginApiCall());
     return userApi
       .singInUser(user)
-      .then(response => {
-        dispatch(singInSuccess(response));
+      .then(user => {
+        dispatch(singInSuccess(user));
       })
       .catch(error => {
         dispatch(apiCallError());
