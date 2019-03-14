@@ -4,9 +4,9 @@ export const API_CALL_ERROR = "API_CALL_ERROR";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
 
-export const SIGNIN_USER = "SINGIN_USER";
+export const SIGNIN_USER_SUCCESS = "SINGIN_USER_SUCCESS";
 export const SIGNIN_USER_FAILURE = "SIGNIN_USER_FAILURE";
-export const SINGOUT_USER = "SINGOUT_USER";
+export const SINGOUT_USER = "SINGOUT_USER"; // no _SUCCESS suffix - there is no api call
 
 export const USERS_LOAD_SUCCESS = "USERS_LOAD_SUCCESS";
 
