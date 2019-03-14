@@ -15,7 +15,7 @@ export function singInUser(user) {
 }
 
 export function getUsers() {
-  return axios.get(utils.BASE_URL + "/api/user", utils.HEADER)
+  return axios.get(utils.BASE_URL + "/api/user", utils.getHeaderObject())
     .then(response => response.data)
     .catch(error => {
       console.error("API call failed. " + error); // eslint-disable-line no-console
