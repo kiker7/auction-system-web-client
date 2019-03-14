@@ -51,6 +51,14 @@ class LibraryPage extends React.Component{
       });
   };
 
+  postGameAuction = (gameId) => {
+    console.log("Post auction for game: " + gameId); // eslint-disable-line no-console
+  };
+
+  isCurrentUserGameOwner = (gameId) => {
+    return this.props.library.games.some(game => game.id === gameId);
+  };
+
   render() {
     const { library } = this.props;
 
@@ -59,7 +67,8 @@ class LibraryPage extends React.Component{
         <div className="mt-4 mb-4">
           <GameForm onSave={this.handleSave} onChange={this.handleChange} sending={this.state.sending} errors={this.state.errors}/>
         </div>
-        { library.games ? (<GameList games={library.games}/>) : (<div className="card bg-info text-white"><div className="card-body">Empty library</div></div>) }
+        { (library.games && library.games.length > 0 ) ? (<GameList games={library.games} postAuction={this.postGameAuction} checkGameOwner={this.isCurrentUserGameOwner} />) :
+          (<div className="card bg-info text-white"><div className="card-body">Empty library</div></div>) }
       </div>
     );
   }
