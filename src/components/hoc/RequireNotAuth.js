@@ -10,7 +10,7 @@ export default function (ComposedComponent) {
 
     static getDerivedStateFromProps(props){
       if(!props.authenticated){
-        push('/signin');
+        push('/signup');
         return null;
       }
       return null;
@@ -18,7 +18,7 @@ export default function (ComposedComponent) {
 
     shouldComponentUpdate(nextProps) {
       if(!nextProps.authenticated){
-        push('/signin');
+        push('/signup');
       }
       return false;
     }
