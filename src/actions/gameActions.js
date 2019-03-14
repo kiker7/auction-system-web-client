@@ -14,6 +14,10 @@ export function saveUserGameFailure(game) {
   return {type: types.POST_GAME_FAILURE, game};
 }
 
+export function loadGamesSuccess(games) {
+  return {type: types.LOAD_GAMES_SUCCESS, games};
+}
+
 export function loadLibrary(userName) {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -34,8 +38,18 @@ export function saveGame(game) {
       .catch(error => {
         dispatch(saveUserGameFailure(game));
         dispatch(apiCallError());
+        throw error;
+      });
+  }
+}
 
-
+export function loadGames() {
+  return function (dispatch) {
+    dispatch(beginApiCall());
+    return libraryApi.getAllGames()
+      .then(games => dispatch(loadGamesSuccess(games)))
+      .catch(error => {
+        dispatch(apiCallError());
         throw error;
       });
   }

@@ -4,7 +4,7 @@ import * as userApi from '../api/userApi';
 
 
 export function singInSuccess(user) {
-  return {type: types.SIGNIN_USER, user};
+  return {type: types.SIGNIN_USER_SUCCESS, user};
 }
 
 export function signInFailure() {

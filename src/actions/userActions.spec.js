@@ -29,7 +29,7 @@ describe("User Actions", () => {
 
       const expectedActions = [
         {type: types.BEGIN_API_CALL},
-        {type: types.SIGNIN_USER}
+        {type: types.SIGNIN_USER_SUCCESS}
       ];
 
       const store = mockStore({ user: {}});
