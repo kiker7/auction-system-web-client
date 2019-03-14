@@ -39,7 +39,7 @@ class LibraryPage extends React.Component{
     this.props.actions
       .saveGame(this.state.game)
       .then(() => {
-        this.setState({sending: false, errors: {}});
+        this.setState({sending: false, errors: {}, game: {}});
         toast.success("Game saved");
       })
       .catch(error => {
@@ -51,7 +51,13 @@ class LibraryPage extends React.Component{
   };
 
   postGameAuction = (gameId) => {
-    console.log("Post auction for game: " + gameId); // eslint-disable-line no-console
+    this.props.actions
+      .postAuction(gameId)
+      .then(() => {
+        toast.success("Auction has been created.");
+        this.setState({sending: false, errors: {}});
+      })
+      .catch((error) => toast.error(error.response.data))
   };
 
   isCurrentUserGameOwner = (gameId) => {

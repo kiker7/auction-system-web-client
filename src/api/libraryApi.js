@@ -29,3 +29,12 @@ export function getAllGames() {
       throw error;
     });
 }
+
+export function postGameAuction(gameId){
+  return axios.post(utils.BASE_URL + "/api/game/" + gameId + "/add-auction", {}, utils.getHeaderObject())
+    .then(response => response.data)
+    .catch(error => {
+      console.error("API call failed. " + error.response.data);
+      throw error;
+    });
+}

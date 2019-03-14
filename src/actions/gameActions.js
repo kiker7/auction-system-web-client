@@ -18,6 +18,14 @@ export function loadGamesSuccess(games) {
   return {type: types.LOAD_GAMES_SUCCESS, games};
 }
 
+export function postGameAuctionSuccess(gameId, auctionId) {
+  return {type: types.POST_GAME_AUCTION_SUCCESS, gameId, auctionId};
+}
+
+export function postGameAuctionFailure() {
+  return {type: types.POST_GAME_AUCTION_FALIRE};
+}
+
 export function loadLibrary(userName) {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -50,6 +58,19 @@ export function loadGames() {
       .then(games => dispatch(loadGamesSuccess(games)))
       .catch(error => {
         dispatch(apiCallError());
+        throw error;
+      });
+  }
+}
+
+export function postAuction(gameId) {
+  return function (dispatch) {
+    dispatch(beginApiCall());
+    return libraryApi.postGameAuction(gameId)
+      .then((auction) => dispatch(postGameAuctionSuccess(gameId, auction.id)))
+      .catch(error => {
+        dispatch(apiCallError());
+        dispatch(postGameAuctionFailure());
         throw error;
       });
   }
