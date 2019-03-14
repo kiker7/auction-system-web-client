@@ -6,6 +6,7 @@ export default {
       username: ""
     },
     users: [],
-    library: {}
+    library: {},
+    games: []
   }
 };
