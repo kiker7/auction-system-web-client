@@ -25,6 +25,7 @@ export function signIn(user) {
     return userApi
       .singInUser(user)
       .then(user => {
+        localStorage.setItem('user', JSON.stringify(user));
         dispatch(singInSuccess(user));
       })
       .catch(error => {

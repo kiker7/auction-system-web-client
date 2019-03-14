@@ -1,3 +1,8 @@
 export function getCurrentUserName() {
-  return JSON.parse(localStorage.getItem('user')).username;
+  try{
+    return JSON.parse(localStorage.getItem('user')).username;
+  }catch (e) {
+    return undefined;
+  }
+
 }

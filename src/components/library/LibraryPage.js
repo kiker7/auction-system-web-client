@@ -19,7 +19,6 @@ class LibraryPage extends React.Component{
   };
 
   componentDidMount() {
-
     this.props.actions.loadLibrary(userUtils.getCurrentUserName())
       .catch(error => {
         toastError("Failed to load user library.", error);

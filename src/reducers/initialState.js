@@ -2,7 +2,7 @@ export default {
   apiCallsInProgress: 0,
   userStore: {
     currentUser: {
-      authenticated: false,
+      authenticated: localStorage.getItem('user') !== null,
       username: ""
     },
     users: [],
