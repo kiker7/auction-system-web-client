@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const GameTile = ({game, postAuction, checkGameOwner}) => (
   <div className="card user-card">
@@ -8,9 +9,10 @@ const GameTile = ({game, postAuction, checkGameOwner}) => (
       <h4 className="card-title">{game.name}</h4>
       <p>Price {game.price}</p>
       {(game.hasOwnProperty('auction') && game.auction) ? (
-          <div className="text-center"><a href="#" className="btn btn-info auction-link text-center" role="button" aria-pressed="true">Go to auction</a></div>)
+          <div className="text-center"> <Link to={"/auction/" + game.auction.id} ><button className="btn btn-info auction-link text-white">Go to auction</button> </Link></div>)
         : (checkGameOwner && (
-          <div className="text-center"><a className="btn btn-success auction-link text-white" role="button" aria-pressed="true" onClick={() => postAuction(game.id)}>Post
+          <div className="text-center"><a className="btn btn-success auction-link text-white" role="button"
+                                          aria-pressed="true" onClick={() => postAuction(game.id)}>Post
             auction</a></div>))}
     </div>
   </div>

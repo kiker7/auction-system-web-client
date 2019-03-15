@@ -11,6 +11,7 @@ import LibraryPage from './library/LibraryPage';
 import AuctionsPage from './auctions/AuctionsPage';
 import Header from './common/Header';
 import GamePage from './games/GamesPage';
+import AuctionPage from './auctions/AuctionPage';
 
 import requireAuth from './hoc/RequireAuth';
 import requireNotAuth from './hoc/RequireNotAuth';
@@ -27,6 +28,7 @@ class App extends React.Component {
           <Route path="/auctions" component={requireAuth(AuctionsPage)} />
           <Route path="/library" component={requireAuth(LibraryPage)} />
           <Route path="/games" component={requireAuth(GamePage)} />
+          <Route path="/auction/:id" component={requireAuth(AuctionPage)} />
           <Route render={PageNotFound}/>
         </Switch>
         <ToastContainer autoClose={1500} hideProgressBar />
