@@ -13,15 +13,22 @@ class AuctionsPage extends React.Component {
       .catch(error => toastError("Failed to load auctions.", error));
   }
 
+  convertTimestamp = (ts) => {
+    let date = new Date(ts);
+    return date.toLocaleDateString("pl-PL");
+  };
+
   render() {
     const {auctions} = this.props;
 
     return (
       <div className="container">
-        <h3>Auctions</h3>
-        {auctions.length > 0 ? (<AuctionsList auctions={auctions}/>) : (<div className="card bg-info text-white">
-          <div className="card-body">No auctions available</div>
-        </div>)}
+        <div className="row justify-content-center mt-4">
+          {auctions.length > 0 ? (<AuctionsList auctions={auctions} convert={this.convertTimestamp}/>) : (
+            <div className="card bg-info text-white">
+              <div className="card-body">No auctions available</div>
+            </div>)}
+        </div>
       </div>
     );
   }
