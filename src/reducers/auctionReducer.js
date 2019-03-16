@@ -10,9 +10,17 @@ export default function auctions(state = initialState.auctionStore, action) {
     case types.POST_BID_SUCCESS:
       return {...state};
     case types.FOLLOW_AUCTION_SUCCESS:
-      return {...state};
+      return {
+        ...state, auctions: state.auctions.map(auction => {
+          return auction.id === action.auction.id ? action.auction : auction;
+        })
+      };
     case types.UNFOLLOW_AUCTION_SUCCESS:
-      return {...state};
+      return {
+        ...state, auctions: state.auctions.map(auction => {
+          return auction.id === action.auction.id ? action.auction : auction;
+        })
+      };
     default:
       return state;
   }

@@ -32,7 +32,7 @@ class AuctionPage extends React.Component {
     }
   }
 
-  followAuction = () => {
+  followAuctionLink = () => {
     if(this.checkIfCurrentUserFollowsAuction()){
       this.props.actions.unfollowAuction(this.state.auction.id)
         .then((response) => {
@@ -96,7 +96,7 @@ class AuctionPage extends React.Component {
           <div className="d-flex">
             <div className="mr-auto"><h4>{auction.game.name}</h4><p>Price: {auction.game.price} $</p></div>
             <div className="auction-card-closing-time"><a className={follow ? "btn btn-warning text-white" : "btn btn-success text-white"}
-                                                          onClick={this.followAuction}>{follow ? "Unfollow" : "Follow"}</a></div>
+                                                          onClick={this.followAuctionLink}>{follow ? "Unfollow" : "Follow"}</a></div>
           </div>
           <div>
             <BidForm
