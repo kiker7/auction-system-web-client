@@ -4,9 +4,17 @@ import PropTypes from 'prop-types';
 import * as actions from "../../actions/auctionActions";
 import {bindActionCreators} from "redux";
 import {toastError} from "../../utils/errors";
-
+import BidForm from './BidForm';
+import BidList from './BidList';
+import {produce} from "immer";
 
 class AuctionPage extends React.Component {
+
+  state = {
+    bid: {},
+    sending: false,
+    errors: {}
+  };
 
   componentDidMount() {
     if (this.props.auctions.length === 0) {
@@ -19,6 +27,22 @@ class AuctionPage extends React.Component {
 
   followAuction = () => {
     console.log("follow auction"); // eslint-disable-line no-console
+  };
+
+  handlePost = event => {
+    event.preventDefault();
+
+    console.log("post bid"); // eslint-disable-line no-console
+
+  };
+
+  handleChange = (event) => {
+    const {name, value} = event.target;
+    this.setState(
+      produce((draft) => {
+        draft.bid[name] = value
+      })
+    );
   };
 
   render() {
@@ -37,10 +61,15 @@ class AuctionPage extends React.Component {
                                                           onClick={this.followAuction}>Follow</a></div>
           </div>
           <div>
-            post bid
+            <BidForm
+              onSave={this.handlePost}
+              onChange={this.handleChange}
+              sending={this.state.sending}
+              errors={this.state.errors}
+            />
           </div>
           <div>
-            bids
+            <BidList/>
           </div>
         </div>)}
       </div>
