@@ -8,5 +8,8 @@ export default {
     users: [],
     library: {},
     games: []
+  },
+  auctionStore: {
+    auctions: []
   }
 };
