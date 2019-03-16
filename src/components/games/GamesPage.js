@@ -6,7 +6,7 @@ import {bindActionCreators} from "redux";
 import * as actions from '../../actions/gameActions';
 import {toastError} from "../../utils/errors";
 
-class GamesPage extends React.Component{
+class GamesPage extends React.Component {
 
   componentDidMount() {
     this.props.actions.loadGames()
@@ -18,8 +18,9 @@ class GamesPage extends React.Component{
   render() {
     const {games} = this.props;
     return (
-      <GameList games={games}/>
-    );
+      <div className="container">
+        <GameList games={games}/>
+      </div>);
   }
 }
 
