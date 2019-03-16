@@ -7,6 +7,7 @@ import {toastError} from "../../utils/errors";
 import BidForm from './BidForm';
 import BidList from './BidList';
 import {produce} from "immer";
+import {toast} from "react-toastify";
 
 class AuctionPage extends React.Component {
 
@@ -31,8 +32,11 @@ class AuctionPage extends React.Component {
 
   handlePost = event => {
     event.preventDefault();
-
-    console.log("post bid"); // eslint-disable-line no-console
+    this.props.actions.postAuctionBid(this.props.match.params.id, this.state.bid)
+      .then(() => toast.success("Bid post success."))
+      .catch(error => {
+        toastError("Failed to post bid offer. ", error)
+      });
 
   };
 

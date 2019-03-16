@@ -7,6 +7,12 @@ export default function auctions(state = initialState.auctionStore, action) {
       return {...state, auctions: action.auctions};
     case types.LOAD_AUCTION_SUCCESS:
       return {...state};
+    case types.POST_BID_SUCCESS:
+      return {...state};
+    case types.FOLLOW_AUCTION_SUCCESS:
+      return {...state};
+    case types.UNFOLLOW_AUCTION_SUCCESS:
+      return {...state};
     default:
       return state;
   }

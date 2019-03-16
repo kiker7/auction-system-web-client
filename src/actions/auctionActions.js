@@ -26,6 +26,22 @@ export function postBidFailure() {
   return {type: types.POST_BID_FAILURE};
 }
 
+export function followAuctionSuccess(auction) {
+  return {type: types.FOLLOW_AUCTION_SUCCESS, auction};
+}
+
+export function followAuctionFailure() {
+  return {type: types.FOLLOW_AUCTION_FAILURE};
+}
+
+export function unfollowAuctionSuccess(auction) {
+  return {type: types.UNFOLLOW_AUCTION_SUCCESS, auction};
+}
+
+export function unfollowAuctionFailure() {
+  return {type: types.UNFOLLOW_AUCTION_FAILURE};
+}
+
 export function loadAuctions() {
   return function (dispatch) {
     dispatch(beginApiCall());
@@ -60,6 +76,32 @@ export function postAuctionBid(id, offer) {
       .catch(error => {
         dispatch(apiCallError());
         dispatch(postBidFailure());
+        throw error;
+      })
+  }
+}
+
+export function followAuction(id) {
+  return function (dispatch) {
+    dispatch(beginApiCall());
+    return auctionApi.followAuction(id)
+      .then(auction => dispatch(followAuctionSuccess(auction)))
+      .catch(error => {
+        dispatch(apiCallError());
+        dispatch(followAuctionFailure());
+        throw error;
+      })
+  }
+}
+
+export function unfollowAuction(id) {
+  return function (dispatch) {
+    dispatch(beginApiCall());
+    return auctionApi.unfollowAuction(id)
+      .then(auction => dispatch(unfollowAuctionSuccess(auction)))
+      .catch(error => {
+        dispatch(apiCallError());
+        dispatch(unfollowAuctionFailure());
         throw error;
       })
   }
