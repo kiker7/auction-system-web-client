@@ -14,15 +14,21 @@ class AuctionPage extends React.Component {
   state = {
     bid: {},
     sending: false,
-    errors: {}
+    errors: {},
+    auction: {}
   };
 
   componentDidMount() {
     if (this.props.auctions.length === 0) {
       this.props.actions.loadAuctions()
+        .then(() => {
+          this.setState({auction: this.props.auctions.find((auction) => auction.id === this.props.match.params.id)});
+        })
         .catch(error => {
           toastError("Failed to load auctions.", error)
         });
+    }else{
+      this.setState({auction: this.props.auctions.find((auction) => auction.id === this.props.match.params.id)});
     }
   }
 
@@ -32,12 +38,15 @@ class AuctionPage extends React.Component {
 
   handlePost = event => {
     event.preventDefault();
+    this.setState({sending: true});
     this.props.actions.postAuctionBid(this.props.match.params.id, this.state.bid)
-      .then(() => toast.success("Bid post success."))
+      .then(() => {
+        toast.success("Bid post success.");
+        this.setState({sending: false});
+      })
       .catch(error => {
         toastError("Failed to post bid offer. ", error)
       });
-
   };
 
   handleChange = (event) => {
@@ -50,14 +59,11 @@ class AuctionPage extends React.Component {
   };
 
   render() {
-
-    const auction = this.props.auctions.find(auction => {
-      return auction.id === this.props.match.params.id;
-    });
+    const {auction} = this.state;
 
     return (
       <div className="container">
-        {auction !== undefined &&
+        {!(Object.entries(auction).length === 0 && auction.constructor === Object) &&
         (<div className="text-center auction-header">
           <div className="d-flex">
             <div className="mr-auto"><h4>{auction.game.name}</h4><p>Price: {auction.game.price} $</p></div>
@@ -84,7 +90,7 @@ class AuctionPage extends React.Component {
 AuctionPage.propTypes = {
   match: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
-  auctions: PropTypes.array.isRequired
+  auctions: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {
