@@ -33,7 +33,29 @@ class AuctionPage extends React.Component {
   }
 
   followAuction = () => {
-    console.log("follow auction"); // eslint-disable-line no-console
+    if(this.checkIfCurrentUserFollowsAuction()){
+      this.props.actions.unfollowAuction(this.state.auction.id)
+        .then((response) => {
+          this.setState({auction: response.auction});
+          toast.success("Unfollow auction success.");
+        })
+        .catch(error => {
+          toastError("Failed to unfollow auction.", error)
+        });
+    }else{
+      this.props.actions.followAuction(this.state.auction.id)
+        .then((response) => {
+          this.setState({auction: response.auction});
+          toast.success("Follow auction success.");
+        })
+        .catch(error => {
+          toastError("Failed to follow auction.", error)
+        });
+    }
+  };
+
+  checkIfCurrentUserFollowsAuction = () => {
+    return this.state.auction.followers.some(user => user.username === this.props.userName);
   };
 
   handlePost = event => {
@@ -60,15 +82,21 @@ class AuctionPage extends React.Component {
 
   render() {
     const {auction} = this.state;
+    let isAuctionEmpty = Object.entries(auction).length === 0 && auction.constructor === Object;
+    let follow = false;
+
+    if(!isAuctionEmpty){
+      follow = this.checkIfCurrentUserFollowsAuction();
+    }
 
     return (
       <div className="container">
-        {!(Object.entries(auction).length === 0 && auction.constructor === Object) &&
+        {!isAuctionEmpty &&
         (<div className="text-center auction-header">
           <div className="d-flex">
             <div className="mr-auto"><h4>{auction.game.name}</h4><p>Price: {auction.game.price} $</p></div>
-            <div className="auction-card-closing-time"><a className="btn btn-success text-white"
-                                                          onClick={this.followAuction}>Follow</a></div>
+            <div className="auction-card-closing-time"><a className={follow ? "btn btn-warning text-white" : "btn btn-success text-white"}
+                                                          onClick={this.followAuction}>{follow ? "Unfollow" : "Follow"}</a></div>
           </div>
           <div>
             <BidForm
@@ -91,11 +119,13 @@ AuctionPage.propTypes = {
   match: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired,
   auctions: PropTypes.array.isRequired,
+  userName: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    auctions: state.auctionStore.auctions
+    auctions: state.auctionStore.auctions,
+    userName: state.userStore.currentUser.username
   };
 }
 
